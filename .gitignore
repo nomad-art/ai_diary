@@ -1,0 +1,34 @@
+.DS_Store
+node_modules
+/build
+/.svelte-kit
+/package
+.env
+.env.*
+!.env.example
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
+
+
+
+dist/
+
+# 3. Сборка Tauri (Rust) — ЭТО ВАЖНО, там гигабайты
+src-tauri/target/
+src-tauri/gen/
+
+# 4. Логи и ошибки
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# 6. Системный мусор
+
+Thumbs.db
+
+# 7. Настройки редактора (вкусовщина, но часто лучше не заливать личные конфиги)
+.vscode/
+.idea/
+
+design/
