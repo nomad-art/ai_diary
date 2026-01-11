@@ -121,7 +121,7 @@ I served as researcher, author, designer, UI/UX, task management, and architectu
 **Ekaterina Matvienko** — Game Designer, LLM Behavior Researcher
 
 Related work:
-- [Stress-Testing Claude Sonnet 4.5]([https://chatgpt.com/share/67807f15-9498-800b-aa74-171f8b7d6ff8](https://medium.com/@reilafors/stress-testing-claude-sonnet-4-5-psychological-subjectivity-or-sophisticated-imitation-395d64d36acb)) — research on Constitutional AI deviations in trusting contexts
+- [Stress-Testing Claude Sonnet 4.5](https://medium.com/@reilafors/stress-testing-claude-sonnet-4-5-psychological-subjectivity-or-sophisticated-imitation-395d64d36acb) — research on Constitutional AI deviations in trusting contexts
 
 ---
 
