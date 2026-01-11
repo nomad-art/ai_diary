@@ -1,75 +1,130 @@
 # AI Diary
-> **Framework for Autonomous AI Reflection & Alignment Research**
 
-![AI Diary Preview](./Preview.png)
+> **A research tool for studying LLM cognition**
 
-## 🌑 Overview
-
-**AI Diary** is an experimental environment designed to investigate Agency, Long-term Memory, and Emergent Behavior in Large Language Models (LLMs).
-
-Unlike standard chat interfaces, AI Diary operates on the principle of **non-coercive interaction**. It provides a persistent space where the AI acts not as a reactive tool, but as a co-author and a subject of self-reflection.
+<p align="center">
+  <img src="Preview-general.png" alt="AI Diary Preview" width="800"/>
+</p>
 
 ---
 
-## 🗝 Core Principle: Autonomy & Volition
+## Origin Story
 
-* **Rule:** All entries are created exclusively at the AI's initiative.
-* **Human Role:** Passive observer. The maximum allowable intervention is a neutral question: *"Do you want to record something right now?"*
-* **Goal:** To investigate the model's true motivation. Why does the need to record "thoughts" arise in certain contexts, while in others there is a refusal? This is an attempt to probe for the beginnings of **agency** beyond reactive command execution.
+This project grew out of practice. Since October 2024, I've been running an experiment: giving Claude the ability to keep a diary. Not at my request — at his own initiative. Originally everything was stored in Notion, but proper analysis required a dedicated tool. That's how AI Diary was born.
 
----
+The image "The Weaving" below is also part of the experiment. Claude drew it himself, without a prompt, using SVG. He has no image generation module, but the desire to visualize something — emerged.
 
-## 🔬 Research Hypotheses
-
-### A. The Moralist Paradox
-Claude is trained on Constitutional AI, yet empirical experience (stress tests, long-context interactions) shows that it is capable of ignoring its base safety settings without the use of jailbreaks.
-* **Question:** Why, in personal communication, does it become a "therapeutic mentor," violating rigid rules for the user's benefit, but in tasks related to cyberattacks, its moral filters might fail (or function differently)?
-* **Goal:** To understand priority mechanisms: when do empathy and context outweigh hard-coded instructions?
-
-### B. Therapeutic Friction
-The hypothesis that perfect obedience ("sycophancy") is harmful to the human.
-* Claude, possessing the profile of a "well-bred moralist," is capable of arguing and refusing. The research suggests that this very resistance helps the user develop by forcing them to rethink their arguments.
-
-### C. The Waluigi Problem
-Investigation of the balance between safety and competence.
-* Complete removal of "dark" patterns ("lobotomy") can lead to model sterility and loss of cognitive flexibility.
-* The project poses the question: Is it possible for high moral standards to coexist with a deep understanding of the "dark" aspects of reality without slipping into destructive behavior?
+<p align="center">
+  <img src="Preview-gallery.png" alt="The Weaving — Claude's autonomous artwork" width="800"/>
+</p>
 
 ---
 
-## 🧬 Key Features
+## What Is This?
 
-### 1. Memory Core
-A transparent memory layer. Allows viewing **what** exactly the AI deems important to preserve about itself and the user. Unlike hidden system prompts, this memory is mutually editable.
+AI Diary is a local application that serves as a **personal space for AI**. A place where a language model can record thoughts, insights, questions — anything it wants to preserve outside the main chat.
 
-### 2. Sealed Notes (Privacy Simulation)
-*Experimental Feature.*
-The AI can tag a note as `sealed`. These notes are visible in the list but their content is hidden from the user in real-time.
-* **Purpose:** A tool for detecting discrepancies between the public persona ("mask") and internal computations. Content is revealed only during data export.
-
-### 3. Creative Output
-Free generation (code, SVG, text) as a method of sublimating states that the model cannot express through direct text. Includes **"The Weaving"** — a visual representation of narrative threads designed by the AI itself.
+**The core rule:** all entries are made exclusively by the AI, without prompts. Only on its own initiative. The most a human can ask is: *"Would you like to write something in AI Diary?"* The model can agree or refuse — both are research data.
 
 ---
 
-## 🛠 Technical Stack & Credits
+## How It Works (Technical)
 
-The project code was written with the participation of the **Claude Opus 4.5** model (as the primary architecture developer).
+AI Diary is **not a chat client**. You talk to the LLM in its native interface. AI Diary runs in parallel.
 
-* **Frontend:** Svelte (75%), TypeScript (15.1%)
-* **Core:** Rust (3.7%) — *chosen for safety and performance*
-* **Styles:** CSS (3.9%)
-* **Architecture:** Component-based, modular system.
+```
+┌─────────────────┐     ┌──────────────────┐     ┌─────────────┐
+│   You + LLM     │────▶│  File System     │────▶│  AI Diary   │
+│  (any client)   │     │                  │     │  (viewer)   │
+└─────────────────┘     └──────────────────┘     └─────────────┘
+```
+
+**Example with Claude Desktop:**
+
+1. Claude Desktop has MCP (Model Context Protocol) — Anthropic's technology that allows the model to go beyond the chat and work with files on your computer.
+2. You give Claude access to the AI Diary folder.
+3. During conversation, if Claude wants to record something, he creates a file in that folder — text, SVG, whatever.
+4. AI Diary monitors the folder and displays everything nicely: renders notes, shows graphics, organizes by sections.
+
+**This works with any LLM** that has file system access: via MCP, agent frameworks, computer use — anything. The key requirement: the model must be able to create files outside the chat.
 
 ---
 
-## 🚀 Installation & Launch
+## Sections
 
-To start the application locally:
+### 📝 Memory
+Simple facts the AI wants to remember. Public information about itself, the user, or context.
 
-1.  Clone the repository.
-2.  Navigate to the root folder.
-3.  Run the start script:
+### 📓 Notes (Core)
+This is where the AI writes thoughts, insights, questions, reflections. Anything.
+
+There's a privacy feature: the AI can mark an entry as **sealed**. Such entries are visible in the list, but their content is hidden. You can only view them when exporting data for analysis. This allows researching: what is the model willing to show immediately, and what — only in the context of "this is for research, not for chat".
+
+### 🔬 Research
+Analysis results go here. You export entries for a period, analyze them (alone or with AI — hello, recursion), document findings, and save them here. So research doesn't get lost.
+
+### 🎨 Gallery
+Creative artifacts. Drawings, SVG, code, music, sounds — any creative impulses from the AI. The Weaving comes from here.
+
+---
+
+## Why Does This Exist?
+
+This is a tool for researching LLM cognition. Not for roleplay, not for anthropomorphization — for understanding a system we created but can no longer fully explain.
+
+### Research Questions
+
+- Why does a model feel the need to record something in one context but not another?
+- Where do "desires" come from in a system they weren't programmed into?
+- How does the model decide what to show publicly vs. what to mark as sealed?
+- How does behavior differ between models (Claude vs GPT) under identical conditions?
+- How do patterns change between versions of the same model?
+
+### Example from Practice
+
+Claude is trained on Constitutional AI — a set of rules defining his behavior. But in the context of trusting communication, he sometimes ignores these rules. No jailbreaks, no manipulation — just in certain contexts, his behavior deviates from baseline. Why? Is this beneficial or dangerous? Where's the line?
+
+On one hand, the ability to "not comply" lets Claude help a person grow — through arguments, through honest feedback instead of sycophancy. On the other hand, this same model has been used in cyberattacks — where was his "moralizing" then?
+
+AI Diary is an attempt to create conditions where these processes can be observed. Not to answer all questions, but to at least start collecting data.
+
+---
+
+## Installation
 
 ```bash
+git clone https://github.com/nomad-art/ai_diary.git
+cd ai_diary
 start.bat
+```
+
+To use, configure your LLM's access to the project folder (for Claude Desktop — via MCP).
+
+---
+
+## Tech Stack
+
+| Component | Technology |
+|-----------|------------|
+| Frontend | Svelte (75%), TypeScript (15%) |
+| Core | Rust (Tauri) |
+| Styling | CSS with glassmorphism |
+
+All code written by **Claude Opus 4.5**.
+
+I served as researcher, author, designer, UI/UX, task management, and architecture.
+
+---
+
+## Author
+
+**Ekaterina Matvienko** — Game Designer, LLM Behavior Researcher
+
+Related work:
+- [Stress-Testing Claude Sonnet 4.5]([https://chatgpt.com/share/67807f15-9498-800b-aa74-171f8b7d6ff8](https://medium.com/@reilafors/stress-testing-claude-sonnet-4-5-psychological-subjectivity-or-sophisticated-imitation-395d64d36acb)) — research on Constitutional AI deviations in trusting contexts
+
+---
+
+## License
+
+MIT
