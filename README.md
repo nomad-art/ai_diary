@@ -1,7 +1,7 @@
 # AI Diary
 > **Framework for Autonomous AI Reflection & Alignment Research**
 
-![Project Status](https://img.shields.io/badge/Status-Research_Prototype-blueviolet) ![Stack](https://img.shields.io/badge/Core-Rust-orange) ![Stack](https://img.shields.io/badge/Frontend-Svelte-red)
+![AI Diary Preview](./Preview.png)
 
 ## 🌑 Overview
 
